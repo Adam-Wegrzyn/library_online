@@ -1,0 +1,55 @@
+{% extends 'library/base.html' %}
+
+{% block content %}
+
+<form method="GET">
+    <div class="form-group">
+    <h6>Type keywords to find a book</h6>
+    <input type="text" name="keywords" class="form-control-sm">
+    <input type="submit" value="search" class="btn btn-primary btn-sm">
+    </div>
+</form>
+
+   {% for book in  data %}
+   <table class="table table-bordered table-success">
+       <thead class="thead-dark">
+       <tr>
+           <th></th>
+           <th>Title</th>
+           <th>Author</th>
+           <th>Date of Public</th>
+           <th>ISBN</th>
+           <th>Number of pages</th>
+           <th>Language</th>
+           <th></th>
+       </tr>
+       </thead>
+    <tr>
+        <td><img src="{{book.volumeInfo.imageLinks.smallThumbnail}}" width="130" height="190"></td>
+        <td>{{book.volumeInfo.title}}</td>
+        <td>{{book.volumeInfo.authors.0}}</td>
+        <td>{{book.volumeInfo.publishedDate}}</td>
+        <td>{{book.volumeInfo.industryIdentifiers.1.identifier}}</td>
+        <td>{{book.volumeInfo.pageCount}}</td>
+        <td>{{book.volumeInfo.language}}</td>
+        <td>    <form method="POST">
+                 {% csrf_token %}
+                <input type="text" value="{{book.volumeInfo.title}}" name="title" hidden="true">
+                <input type="text" value="{{book.volumeInfo.authors.0}}" name="author" hidden="true">
+                <input type="text" value="{{book.volumeInfo.publishedDate}}" name="date_of_public" hidden="true">
+                <input type="text" value="{{book.volumeInfo.industryIdentifiers.1.identifier}}" name="isbn" hidden="true">
+                <input type="text" value="{{book.volumeInfo.pageCount}}" name="page_count" hidden="true">
+                <input type="text" value="{{book.volumeInfo.imageLinks.smallThumbnail}}" name="cover_link" hidden="true">
+                <input type="text" value="{{book.volumeInfo.language}}" name="lang" hidden="true">
+                <input type="submit" value="Add" class="btn btn-primary btn-sm">
+                </form>
+        </td>
+
+    </tr>
+    </table>
+
+    {% endfor %}
+
+
+
+{% endblock %}
