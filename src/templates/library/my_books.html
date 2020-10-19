@@ -1,0 +1,77 @@
+{% extends 'library/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% if user.is_authenticated %}
+{% block content  %}
+
+
+
+
+    <form method="get" class="form-group">
+        <h6>My books</h6>
+        <div class="form-row">
+         <div class="form-row">
+          {{ books_filter.form.title | as_crispy_field }}
+          {{ books_filter.form.author|as_crispy_field }}
+             {{ books_filter.form.lang|as_crispy_field }}
+
+         </div>
+            <div class="form-row">
+            {{ books_filter.form.end_date |as_crispy_field}}
+            {{ books_filter.form.start_date | as_crispy_field}}
+
+            </div>
+
+
+
+
+
+        </div>
+        <input class="btn btn-primary btn-sm" type="submit" value="Search">
+    </form>
+
+<div>
+   {% for book in  books_filter.qs %}
+   <table class="table table-bordered table-success">
+       <thead class="thead-dark">
+       <tr>
+           <th></th>
+           <th>Title</th>
+           <th>Author</th>
+           <th>Publication date</th>
+           <th>ISBN</th>
+           <th>Number of pages</th>
+           <th>Language</th>
+           <th></th>
+       </tr>
+       </thead>
+    <tr>
+        <td><img src="{{book.cover_link}}" width="130" height="190"></td>
+        <td>{{book.title}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.date_of_public}}</td>
+        <td>{{book.isbn}}</td>
+        <td>{{book.page_count}}</td>
+        <td>{{book.lang}}</td>
+        <td><a class="btn btn-primary btn-sm" href="{% url 'edit_book' book_pk=book.id %}">Edit</a><form method="GET">
+            <input type="text" name="id" value="{{book.id}}" hidden="true" >
+                <input type="submit" class="btn btn-primary btn-sm" value="Delete">
+            </form></td>
+
+    </tr>
+    </table>
+
+
+
+    {% endfor %}
+</div>
+
+
+
+
+{% endblock %}
+{% else %}
+{% endif %}
+
+<script src="{% static 'library/js/main.js' %}"></script>

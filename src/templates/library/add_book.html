@@ -1,0 +1,47 @@
+{% extends 'library/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+            <h6>Add new book to your library</h6>
+    <div class="form-row">
+
+        <div>
+            {{ form.title | as_crispy_field }}
+        </div>
+        <div>
+            {{ form.author | as_crispy_field }}
+        </div>
+            <div>
+            {{ form.date_of_public | as_crispy_field }}
+        </div>
+        </div>
+            <div class="form-row">
+        <div>
+            {{ form.isbn | as_crispy_field }}
+        </div>
+        <div>
+            {{ form.page_count | as_crispy_field }}
+        </div>
+        <div>
+            {{ form.cover_link | as_crispy_field }}
+        </div>
+        <div>
+                {{ form.lang | as_crispy_field }}
+        </div>
+        </div>
+        <button class="btn btn-primary btn-sm" type="submit">Add</button>
+    </div>
+</form>
+
+
+
+{% endblock %}
+
