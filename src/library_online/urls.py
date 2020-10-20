@@ -33,5 +33,6 @@ urlpatterns = [
     path('api-token-auth/', rest_view.obtain_auth_token, name='api-token-auth'),
     path('login/', LoginView.as_view(template_name='library/login.html'), name='login'),
     path('register/', user_view.register, name='register'),
-    path('', include('django.contrib.auth.urls'))
+    path('', include('django.contrib.auth.urls')),
+    path('<int:book_pk>/delete/', views.delete_book, name='delete_book')
 ]
