@@ -8,6 +8,8 @@ from rest_framework import status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from .serializers import BookSerializer
 from datetime import datetime as dt
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
 def index(request):
@@ -15,23 +17,20 @@ def index(request):
 
 
 def my_books(request):
-    #delete book
-    if request.method == 'GET':
-        if request.GET.get('id', ''):
-            book_to_del = Book.objects.get(pk =request.GET['id'])
-            book_to_del.delete()
-            print(book_to_del)
-
     books = request.user.book.all()
     books_filter = BookFilter(request.GET, queryset=books)
-    print(books_filter.Meta.fields)
-    print(books_filter.Meta.widgets)
+
     context = {
         # 'books': books,
         'books_filter': books_filter
     }
     return render(request, 'library/my_books.html', context)
 
+def delete_book(request, book_pk):
+        book_to_del = Book.objects.get(pk =book_pk)
+        book_to_del.delete()
+
+        return HttpResponseRedirect(reverse('my_books'))
 
 def add_book(request):
     form = Book_add
@@ -67,8 +66,9 @@ def edit_book(request, book_pk):
         if form.is_valid():
             form.save()
             form = Book_add()
+            request.user.book.add(book_instance)
+            print(book_instance)
             messages.success(request, 'Book has been successfully edited!')
-            print(Book_add)
         else:
             print('not valid', form.errors)
 
