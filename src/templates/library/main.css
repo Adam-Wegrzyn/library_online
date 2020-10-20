@@ -1,0 +1,99 @@
+body {
+background: #ebfcff;
+color: black;
+}
+
+.navbar{
+    background: #00333b;
+    
+ 
+}
+
+.navbar-brand {
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 28px;
+    font-weight: 100;
+}
+
+.nav-item{
+    margin-right: 14px;
+    color: white;
+    
+}
+
+.nav-link{
+color: #b5ca3c;
+}
+
+.navbar-collapse{
+    justify-content: flex-end;
+}
+
+.header{
+
+    background-image: url('img/lib.jpg');
+    background-size: cover;
+    background-position: center;
+    position:relative;
+}
+
+.overlay{
+    position:absolute;
+    min-width: 100%;
+    min-height: 100%;
+    left: 0;
+    right: 0;
+    background: #000000d5;
+}
+
+.description{
+    left:50%;
+    position: absolute;
+    top:45%;
+    transform: translate(-50%, -55%);
+    text-align: center;
+
+}
+
+.description h1 {
+    color: #b5ca3c;
+}
+
+.description p {
+    color:#fff;
+    font-size:1.3rem ;
+    line-height:1.5 ;
+}
+
+.description a {
+    margin-right: 5px;
+    margin-left: 5px;
+    right:200px;
+    }
+
+
+.description button {
+
+    border: 1px solid #000000;
+    background: #6ab446;
+    border-radius: 0;
+    color: #fff;
+    }
+
+.cover{
+width: 200px;
+height: 600px;
+}
+
+.form-group{
+margin-top: 30px;
+padding: 20px;
+}
+
+.username{
+color:#727272
+}
+
+
