@@ -90,7 +90,8 @@ def import_book(request):
     url = 'https://www.googleapis.com/books/v1/volumes'
     params = {
 
-        'q': keywords
+        'q': keywords,
+        'max_results': 40
     }
 
     if request.method == 'POST':
@@ -115,7 +116,8 @@ def import_book(request):
             messages.success(request, 'New book has been successfully added to your library!')
     response = (requests.get(url, params))
     data = response.json()
-
+    print(data)
+    print(form.errors)
     #get needed value (list) from 'items' key in json response
     data = data.get('items', '')
     context = {
